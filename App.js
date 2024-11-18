@@ -1,33 +1,33 @@
-import { Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "./Home";
-import Details from "./Details";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Platform } from "react-native";
+import Movies from "./Movies";
+import Planets from "./Planets";
+import Spaceships from "./Spaceships";
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen
-          name="Details"
-          component={Details}
-          options={({ route }) => ({
-            headerRight: () => {
-              const stock = route.params?.stock ?? 0;
-              return (
-                <Button
-                  title="Buy"
-                  onPress={() => {}}
-                  disabled={stock === 0}
-                />
-              );
-            },
-          })}
-        />
-      </Stack.Navigator>
+      {Platform.OS === "ios" && (
+        <Tab.Navigator>
+          <Tab.Screen name="Movies" component={Movies} />
+          <Tab.Screen name="Planets" component={Planets} />
+          <Tab.Screen name="Spaceships" component={Spaceships} />
+        </Tab.Navigator>
+      )}
+
+      {Platform.OS == "android" && (
+        <Drawer.Navigator>
+          <Drawer.Screen name="Movies" component={Movies} />
+          <Drawer.Screen name="Planets" component={Planets} />
+          <Drawer.Screen name="Spaceships" component={Spaceships} />
+        </Drawer.Navigator>
+      )}
     </NavigationContainer>
   );
 }
+
