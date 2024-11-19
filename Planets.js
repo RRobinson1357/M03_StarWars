@@ -20,7 +20,7 @@ export default function Planet() {
       <FlatList
         data={planets}
         keyExtractor={(item) => item.uid.toString()}
-        renderItem={({ item }) => <Text style={styles.item}>{item.properties.name}</Text>}
+        renderItem={({ item }) => <Text style={styles.item}>{item.name}</Text>}
       />
     </View>
   );
