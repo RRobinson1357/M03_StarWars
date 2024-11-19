@@ -1,6 +1,6 @@
 export async function fetchMovies() {
   try {
-    const response = await fetch('https://www.swapi.tech/api/films/1');
+    const response = await fetch('https://www.swapi.tech/api/films');
     const data = await response.json();
     return data.result;
   } catch (error) {
