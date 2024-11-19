@@ -4,28 +4,23 @@ import styles from "./styles";
 import { fetchStarships } from "./api";
 
 export default function Spaceships() {
-  const [starships, setStarships] = useState([]);
+  const [ships, setShips] = useState([]);
 
   useEffect(() => {
-    const getStarships = async () => {
-      const fetchedStarships = await fetchStarships();
-      setStarships(fetchedStarships);
+    const getShips = async () => {
+      const fetchedShips = await fetchStarships();
+      setShips(fetchedShips);
     };
 
-    getStarships();
+    getShips();
   }, []);
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={starships}
+        data={ships}
         keyExtractor={(item) => item.uid.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.item}>
-            <Text style={styles.title}>{item.properties.name}</Text>
-            <Text>Model: {item.properties.model}</Text>
-          </View>
-        )}
+        renderItem={({ item }) => <Text style={styles.item}>{item.name}</Text>}
       />
     </View>
   );
